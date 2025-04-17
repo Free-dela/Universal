@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import path from 'path';
 import { Page } from '@playwright/test';
 
-test.beforeEach('Login', async ({ page,isMobile }) => {
+test.beforeEach('Login', async ({ page, isMobile }) => {
   // Go to the home page
   await page.goto('https://vizzainsurance.com/home');
   // Click on the Policy Login link
@@ -24,7 +24,8 @@ test.beforeEach('Login', async ({ page,isMobile }) => {
   // Click on the Health Insurance link
   await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
   // Verify the Health Insurance heading is visible
-  await expect(page.getByRole('heading', { name: 'vizza-Health-Insurance Health' })).toBeVisible();     });
+  await expect(page.getByRole('heading', { name: 'vizza-Health-Insurance Health' })).toBeVisible();
+});
 
 export const FormHelper = {
   async fillFormAndUploadFiles(page: Page) {
@@ -79,7 +80,7 @@ export const Acceptaccess = async (page: Page) =>
     }
   }
 
-test.describe('Summary Flow', () => {
+test.describe.parallel('Summary Flow', () => {
 test.afterEach('Summary', async ({ page,isMobile }) => {
   const ReviewLinkButton = page.getByRole('button', { name: 'Review Link' });
   // Label: Check if the "Review Link" button is visible on mobile
@@ -96,258 +97,278 @@ test.afterEach('Summary', async ({ page,isMobile }) => {
   await payButton.click();
 });
 
-test('Comprehensive', async ({ page, isMobile }) => {
+test('Comprehensive', async ({ page :page1, isMobile }) => {
 
-    if (isMobile) {await page.waitForTimeout(4000);
-      await page.getByRole('button').filter({ hasText: 'menu' }).click();
-      await page.locator('a').filter({ hasText: 'Health Insurance' }).click();
-      await page.waitForTimeout(5000);
-      await page.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
-      await page.getByRole('textbox', { name: 'Name' }).type('Star');
-      await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-      await page.getByRole('button', { name: 'Next' }).click();
-      await page.locator('#mat-input-25').type('25');
-      await page.locator('#mat-input-27').type('25');
-      await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
-      await page.getByRole('button', { name: 'Proceed' }).click();
-      await page.waitForTimeout(5000);
-      await page.getByRole('button', { name: '₹ 13280/Yr' }).click();
-      await Acceptaccess(page);}
-      else {await page.waitForTimeout(2000);
-      await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
-      await page.waitForTimeout(1000);
-      await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
-      await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
-      await page.waitForTimeout(5000);
-      await page.getByRole('textbox', { name: 'Name' }).type('Star');
-      await page.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
-      await page.getByRole('textbox', { name: 'Mobile Number' }).click();
-      await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-      await page.getByRole('button', { name: 'Next' }).click();
-      await page.locator('#mat-input-45').type('25');
-      await page.locator('#mat-input-47').type('25');
-      await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
-      await page.getByRole('button', { name: 'Proceed' }).click();
-      await page.getByRole('button', { name: '₹ 13280/Yr' }).click();
-      await Acceptaccess(page);}
-      if (isMobile) { await page.evaluate(() => window.scrollTo(0, 0)); }
-    await page.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
-    await page.getByText('Mr', { exact: true }).click();
-    await page.getByRole('textbox', { name: 'Last Name' }).type('Comprehensive');
-    await page.getByLabel('1PROPOSER DETAILS').getByText('OccupationOccupation *').click();
-    await page.getByText('PROFESSIONAL-ENGINEER').click();
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09121999');
-    await page.getByLabel('1PROPOSER DETAILS').locator('div').filter({ hasText: /^Email ID \*$/ }).nth(3).click();
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 1 *').type('2A');
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 2 *').type('Star Comprehensive');
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Pincode *').type('600012');
-    await page.waitForTimeout(2000);
-    await page.getByLabel('1PROPOSER DETAILS').getByLabel('City *').getByText('City').click();
-    await page.getByText('Chennai').click();
-    await page.waitForTimeout(2000);
-    await page.getByLabel('1PROPOSER DETAILS').getByLabel('Area *').getByText('Area').click();
-    await page.getByText('Perambur Barracks').click();
-    await FormHelper.fillFormAndUploadFiles(page);
-    await page.getByLabel('2INSURED DETAILS').getByText('Same as proposer').click();
-    await page.getByRole('textbox', { name: 'Height(cms)' }).type('170');
-    await page.getByRole('textbox', { name: 'Weight(kgs)' }).type('70');
-    await page.waitForTimeout(2000);
-    await page.locator('#mat-radio-30').getByText('Yes').click();
-    await page.waitForTimeout(4000);
-    await page.getByRole('button', { name: '2.INSURED DETAILS' }).click();
-    await page.waitForTimeout(2000);
-    await page.getByRole('textbox', { name: 'Name', exact: true }).type('Test SC');
-    await page.getByRole('region', { name: '2.INSURED DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('09121999');
-    await page.getByRole('combobox', { name: 'Gender Gender' }).locator('span').click();
-    await page.getByRole('option', { name: 'Female' }).locator('span').click();
-    await page.getByRole('textbox', { name: 'Height(cms)' }).type('160');
-    await page.getByRole('textbox', { name: 'Weight(kgs)' }).type('60');
-    await page.getByRole('combobox', { name: 'Occupation Occupation' }).locator('span').click();
-    await page.getByText('Housewives').click();
-    await page.getByLabel('2INSURED DETAILS').getByText('Relationship with ProposerRelationship with Proposer *').click();
-    await page.getByText('SPOUSE', { exact: true }).click();
-    await page.getByLabel('2INSURED DETAILS').getByRole('button', { name: 'Next' }).click();
-    await page.locator('#mat-input-108').fill('Nominee');
-    await page.locator('#mat-input-109').fill('25');
-    await page.getByLabel('3NOMINEE DETAILS').getByLabel('', { exact: true }).locator('span').click();
-    await page.getByText('Sister').click();
-    await page.locator('#mat-input-110').fill('100');
-    await page.waitForTimeout(1000);
-    await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();        }); 
-    test.setTimeout(90000);
+    if (isMobile) {await page1.waitForTimeout(4000);
+      await page1.getByRole('button').filter({ hasText: 'menu' }).click();
+      await page1.locator('a').filter({ hasText: 'Health Insurance' }).click();
+      await page1.waitForTimeout(5000);
+      await page1.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
+      await page1.getByRole('textbox', { name: 'Name' }).type('Star');
+      await page1.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+      await page1.getByRole('button', { name: 'Next' }).click();
+      await page1.locator('#mat-input-25').type('25');
+      await page1.locator('#mat-input-27').type('25');
+      await page1.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
+      await page1.getByRole('button', { name: 'Proceed' }).click();
+      await page1.waitForTimeout(5000);
+      await page1.getByRole('button', { name: '₹ 13280/Yr' }).click();
+      await Acceptaccess(page1);}
+      else {await page1.waitForTimeout(2000);
+      await page1.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
+      await page1.waitForTimeout(1000);
+      await page1.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
+      await page1.getByRole('link', { name: 'Health Insurance', exact: true }).click();
+      await page1.waitForTimeout(5000);
+      await page1.getByRole('textbox', { name: 'Name' }).type('Star');
+      await page1.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
+      await page1.getByRole('textbox', { name: 'Mobile Number' }).click();
+      await page1.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+      await page1.getByRole('button', { name: 'Next' }).click();
+      await page1.locator('#mat-input-45').type('25');
+      await page1.locator('#mat-input-47').type('25');
+      await page1.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
+      await page1.getByRole('button', { name: 'Proceed' }).click();
+      await page1.getByRole('button', { name: '₹ 13280/Yr' }).click();
+      await Acceptaccess(page1);}
+      if (isMobile) { await page1.evaluate(() => window.scrollTo(0, 0)); }
+    await page1.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
+    await page1.getByText('Mr', { exact: true }).click();
+    await page1.getByRole('textbox', { name: 'Last Name' }).type('Comprehensive');
+    await page1.getByLabel('1PROPOSER DETAILS').getByText('OccupationOccupation *').click();
+    await page1.getByText('PROFESSIONAL-ENGINEER').click();
+    await page1.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09121999');
+    await page1.getByLabel('1PROPOSER DETAILS').locator('div').filter({ hasText: /^Email ID \*$/ }).nth(3).click();
+    await page1.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 1 *').type('2A');
+    await page1.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 2 *').type('Star Comprehensive');
+    await page1.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Pincode *').type('600012');
+    await page1.waitForTimeout(2000);
+    await page1.getByLabel('1PROPOSER DETAILS').getByLabel('City *').getByText('City').click();
+    await page1.getByText('Chennai').click();
+    await page1.waitForTimeout(2000);
+    await page1.getByLabel('1PROPOSER DETAILS').getByLabel('Area *').getByText('Area').click();
+    await page1.getByText('Perambur Barracks').click();
+    await FormHelper.fillFormAndUploadFiles(page1);
+    await page1.getByLabel('2INSURED DETAILS').getByText('Same as proposer').click();
+    await page1.getByRole('textbox', { name: 'Height(cms)' }).type('170');
+    await page1.getByRole('textbox', { name: 'Weight(kgs)' }).type('70');
+    await page1.waitForTimeout(2000);
+    await page1.locator('#mat-radio-30').getByText('Yes').click();
+    await page1.waitForTimeout(4000);
+    await page1.getByRole('button', { name: '2.INSURED DETAILS' }).click();
+    await page1.waitForTimeout(2000);
+    await page1.getByRole('textbox', { name: 'Name', exact: true }).type('Test SC');
+    await page1.getByRole('region', { name: '2.INSURED DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('09121999');
+    await page1.getByRole('combobox', { name: 'Gender Gender' }).locator('span').click();
+    await page1.getByRole('option', { name: 'Female' }).locator('span').click();
+    await page1.getByRole('textbox', { name: 'Height(cms)' }).type('160');
+    await page1.getByRole('textbox', { name: 'Weight(kgs)' }).type('60');
+    await page1.getByRole('combobox', { name: 'Occupation Occupation' }).locator('span').click();
+    await page1.getByText('Housewives').click();
+    await page1.getByLabel('2INSURED DETAILS').getByText('Relationship with ProposerRelationship with Proposer *').click();
+    await page1.getByText('SPOUSE', { exact: true }).click();
+    await page1.getByLabel('2INSURED DETAILS').getByRole('button', { name: 'Next' }).click();
+    await page1.locator('#mat-input-108').fill('Nominee');
+    await page1.locator('#mat-input-109').fill('25');
+    await page1.getByLabel('3NOMINEE DETAILS').getByLabel('', { exact: true }).locator('span').click();
+    await page1.getByText('Sister').click();
+    await page1.locator('#mat-input-110').fill('100');
+    await page1.waitForTimeout(1000);
+    await page1.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();        }); 
+    test.setTimeout(80000);
 
-test('Assure', async ({ page, isMobile }) => {
+test('Assure', async ({ page :page2, isMobile }) => {
   
-  if (isMobile) { await page.waitForTimeout(2000);
-    await page.getByRole('button').filter({ hasText: 'menu' }).click();
-    await page.locator('a').filter({ hasText: 'Health Insurance' }).click();
-    await page.waitForTimeout(4000);
-    await page.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
-    await page.getByRole('textbox', { name: 'Name' }).type('Star');
-    await page.getByRole('textbox', { name: 'Mobile Number' }).click();
-    await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-    await page.getByRole('button', { name: 'Next' }).click();
-    await page.locator('#mat-input-25').type('25');
-    await page.locator('#mat-input-27').type('25');
-    await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
-    await page.getByRole('button', { name: 'Proceed' }).click();
-    await page.getByRole('button', { name: '₹12930 /Yr' }).click();
-    await Acceptaccess(page);}
-    else {await page.waitForTimeout(2000); 
-    await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
-    await page.waitForTimeout(1000);
-    await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
-    await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
-    await page.waitForTimeout(5000);
-    await page.getByRole('textbox', { name: 'Name' }).type('Star');
-    await page.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
-    await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-    await page.getByRole('button', { name: 'Next' }).click();
-    await page.locator('#mat-input-45').type('25');
-    await page.locator('#mat-input-47').type('25');
-    await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
-    await page.getByRole('button', { name: 'Proceed' }).click();
-    await page.getByRole('button', { name: '₹ 12930/Yr' }).click();
-    await Acceptaccess(page);}
-    if (isMobile) {await page.evaluate(() => window.scrollTo(0, 0)); }
-    await page.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
-    await page.getByText('Mr', { exact: true }).click();
-    await page.getByRole('textbox', { name: 'Last Name' }).type('Assure');
-    await page.getByLabel('1PROPOSER DETAILS').getByText('OccupationOccupation *').click();
-    await page.getByText('PROFESSIONAL-ENGINEER').click();
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09121999');
-    await page.getByLabel('1PROPOSER DETAILS').locator('div').filter({ hasText: /^Email ID \*$/ }).nth(3).click();
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 1 *').type('2A');
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 2 *').type('Star Assure');
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Pincode *').type('600012');
-    await page.waitForTimeout(2000);
-    await page.getByLabel('1PROPOSER DETAILS').getByLabel('City *').getByText('City').click();
-    await page.getByText('Chennai').click();
-    await page.waitForTimeout(2000);
-    await page.getByLabel('1PROPOSER DETAILS').getByLabel('Area *').getByText('Area').click();
-    await page.getByText('Perambur Barracks').click();
-    await FormHelper.fillFormAndUploadFiles(page);
-    await page.getByLabel('2INSURED DETAILS').getByText('Same as proposer').click();
-    await page.getByRole('textbox', { name: 'Height(cms)' }).type('170');
-    await page.getByRole('textbox', { name: 'Weight(kgs)' }).type('70');
-    await page.getByRole('button', { name: '2.INSURED DETAILS' }).click();
-    await page.waitForTimeout(2000);
-    await page.getByRole('textbox', { name: 'Name', exact: true }).type('Test SC');
-    await page.getByRole('region', { name: '2.INSURED DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('09121999');
-    await page.getByRole('combobox', { name: 'Gender Gender' }).locator('span').click();
-    await page.getByRole('option', { name: 'Female' }).locator('span').click();
-    await page.getByRole('textbox', { name: 'Height(cms)' }).type('160');
-    await page.getByRole('textbox', { name: 'Weight(kgs)' }).type('60');
-    await page.getByRole('combobox', { name: 'Occupation Occupation' }).locator('span').click();
-    await page.getByText('Housewives').click();
-    await page.getByLabel('2INSURED DETAILS').getByText('Relationship with ProposerRelationship with Proposer *').click();
-    await page.getByText('SPOUSE', { exact: true }).click();
-    await page.getByLabel('2INSURED DETAILS').getByRole('button', { name: 'Next' }).click();
-    await page.locator('#mat-input-108').fill('Nominee');
-    await page.locator('#mat-input-109').fill('25');
-    await page.getByLabel('3NOMINEE DETAILS').getByLabel('', { exact: true }).locator('span').click();
-    await page.getByText('Sister').click();
-    await page.locator('#mat-input-110').fill('100');
-    await page.waitForTimeout(2000);
-    await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();        }); 
-    test.setTimeout(90000);
+  if (isMobile) {
+    await page2.waitForTimeout(2000);
+    await page2.getByRole('button').filter({ hasText: 'menu' }).click();
+    await page2.locator('a').filter({ hasText: 'Health Insurance' }).click();
+    await page2.waitForTimeout(4000);
+    await page2.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
+    await page2.getByRole('textbox', { name: 'Name' }).type('Star');
+    await page2.getByRole('textbox', { name: 'Mobile Number' }).click();
+    await page2.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+    await page2.getByRole('button', { name: 'Next' }).click();
+    await page2.locator('#mat-input-25').type('25');
+    await page2.locator('#mat-input-27').type('25');
+    await page2.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
+    await page2.getByRole('button', { name: 'Proceed' }).click();
+    await page2.getByRole('button', { name: '₹12930 /Yr' }).click();
+    await Acceptaccess(page2);
+} else {
+    await page2.waitForTimeout(2000); 
+    await page2.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
+    await page2.waitForTimeout(1000);
+    await page2.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
+    await page2.getByRole('link', { name: 'Health Insurance', exact: true }).click();
+    await page2.waitForTimeout(5000);
+    await page2.getByRole('textbox', { name: 'Name' }).type('Star');
+    await page2.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
+    await page2.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+    await page2.getByRole('button', { name: 'Next' }).click();
+    await page2.locator('#mat-input-45').type('25');
+    await page2.locator('#mat-input-47').type('25');
+    await page2.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
+    await page2.getByRole('button', { name: 'Proceed' }).click();
+    await page2.getByRole('button', { name: '₹ 12930/Yr' }).click();
+    await Acceptaccess(page2);
+}
 
-test('Womens Care', async ({ page, isMobile }) => {
-  
-  if (isMobile) { await page.waitForTimeout(2000);
-    await page.getByRole('button').filter({ hasText: 'menu' }).click();
-    await page.locator('a').filter({ hasText: 'Health Insurance' }).click();
-    await page.waitForTimeout(4000);
-    await page.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
-    await page.getByRole('textbox', { name: 'Name' }).type('Star');
-    await page.getByRole('textbox', { name: 'Mobile Number' }).click();
-    await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-    await page.getByRole('button', { name: 'Next' }).click();
-    await page.locator('#mat-input-25').type('25');
-    await page.locator('#mat-input-27').type('25');
-    await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
-    await page.getByRole('button', { name: 'Proceed' }).click();
-    await page.getByRole('button', { name: '₹14904 /Yr' }).click();
-    await Acceptaccess(page);}
-    else {await page.waitForTimeout(2000); 
-    await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
-    await page.waitForTimeout(1000);
-    await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
-    await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
-    await page.waitForTimeout(5000);
-    await page.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
-    await page.getByRole('textbox', { name: 'Name' }).type('Star');
-    await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-    await page.getByRole('button', { name: 'Next' }).click();
-    await page.locator('#mat-input-45').type('25');
-    await page.locator('#mat-input-47').type('25');
-    await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
-    await page.getByRole('button', { name: 'Proceed' }).click();
-    await page.getByRole('button', { name: '₹ 14904/Yr' }).click();
-    await Acceptaccess(page);}
-    if (isMobile) {await page.evaluate(() => window.scrollTo(0, 0)); }
-    await page.waitForTimeout(5000);
-    await page.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
-    await page.getByText('Mr', { exact: true }).click();
-    await page.getByRole('textbox', { name: 'Last Name' }).type('WomensCare');
-    await page.getByLabel('1PROPOSER DETAILS').getByText('OccupationOccupation *').click();
-    await page.getByText('PROFESSIONAL-ENGINEER').click();
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09121999');
-    await page.getByLabel('1PROPOSER DETAILS').locator('div').filter({ hasText: /^Email ID \*$/ }).nth(3).click();
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 1 *').type('2A');
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 2 *').type('Star Assure');
-    await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Pincode *').type('600012');
-    await page.waitForTimeout(2000);
-    await page.getByLabel('1PROPOSER DETAILS').getByLabel('City *').getByText('City').click();
-    await page.getByText('Chennai').click();
-    await page.waitForTimeout(2000);
-    await page.getByLabel('1PROPOSER DETAILS').getByLabel('Area *').getByText('Area').click();
-    await page.getByText('Perambur Barracks').click();
-    await FormHelper.fillFormAndUploadFiles(page);
-    await page.getByLabel('2INSURED DETAILS').getByText('Same as proposer').click();
-    await page.getByRole('textbox', { name: 'Height(cms)' }).type('170');
-    await page.getByRole('textbox', { name: 'Weight(kgs)' }).type('70');
-    await page.waitForTimeout(2000);
-    await page.getByRole('button', { name: '2.INSURED DETAILS' }).click();
-    await page.waitForTimeout(2000);
-    await page.getByRole('textbox', { name: 'Name', exact: true }).type('Test SW');
-    await page.getByRole('region', { name: '2.INSURED DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('09121999');
-    await page.getByRole('combobox', { name: 'Gender Gender' }).locator('span').click();
-    await page.getByText('Female').click();
-    await page.getByRole('textbox', { name: 'Height(cms)' }).fill('160');
-    await page.getByRole('textbox', { name: 'Weight(kgs)' }).fill('60');
-    await page.getByRole('combobox', { name: 'Occupation Occupation' }).locator('span').click();
-    await page.getByText('Housewives').click();
-    await page.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
-    await page.getByText('SPOUSE', { exact: true }).click();
-    await page.getByLabel('2INSURED DETAILS').getByRole('button', { name: 'Next' }).click();
-    await page.locator('#mat-input-108').fill('Nominee');
-    await page.locator('#mat-input-109').fill('25');
-    await page.getByLabel('3NOMINEE DETAILS').getByLabel('', { exact: true }).locator('span').click();
-    await page.getByText('Brother', { exact: true }).click();
-    await page.locator('#mat-input-110').fill('100');
-    await page.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();    });
-    test.setTimeout(90000);
+if (isMobile) {
+    await page2.evaluate(() => window.scrollTo(0, 0));
+}
 
-      });
+await page2.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
+await page2.getByText('Mr', { exact: true }).click();
+await page2.getByRole('textbox', { name: 'Last Name' }).type('Assure');
+await page2.getByLabel('1PROPOSER DETAILS').getByText('OccupationOccupation *').click();
+await page2.getByText('PROFESSIONAL-ENGINEER').click();
+await page2.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09121999');
+await page2.getByLabel('1PROPOSER DETAILS').locator('div').filter({ hasText: /^Email ID \*$/ }).nth(3).click();
+await page2.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 1 *').type('2A');
+await page2.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 2 *').type('Star Assure');
+await page2.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Pincode *').type('600012');
+await page2.waitForTimeout(2000);
+await page2.getByLabel('1PROPOSER DETAILS').getByLabel('City *').getByText('City').click();
+await page2.getByText('Chennai').click();
+await page2.waitForTimeout(2000);
+await page2.getByLabel('1PROPOSER DETAILS').getByLabel('Area *').getByText('Area').click();
+await page2.getByText('Perambur Barracks').click();
+await FormHelper.fillFormAndUploadFiles(page2);
+await page2.getByLabel('2INSURED DETAILS').getByText('Same as proposer').click();
+await page2.getByRole('textbox', { name: 'Height(cms)' }).type('170');
+await page2.getByRole('textbox', { name: 'Weight(kgs)' }).type('70');
+await page2.getByRole('button', { name: '2.INSURED DETAILS' }).click();
+await page2.waitForTimeout(2000);
+await page2.getByRole('textbox', { name: 'Name', exact: true }).type('Test SC');
+await page2.getByRole('region', { name: '2.INSURED DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('09121999');
+await page2.getByRole('combobox', { name: 'Gender Gender' }).locator('span').click();
+await page2.getByRole('option', { name: 'Female' }).locator('span').click();
+await page2.getByRole('textbox', { name: 'Height(cms)' }).type('160');
+await page2.getByRole('textbox', { name: 'Weight(kgs)' }).type('60');
+await page2.getByRole('combobox', { name: 'Occupation Occupation' }).locator('span').click();
+await page2.getByText('Housewives').click();
+await page2.getByLabel('2INSURED DETAILS').getByText('Relationship with ProposerRelationship with Proposer *').click();
+await page2.getByText('SPOUSE', { exact: true }).click();
+await page2.getByLabel('2INSURED DETAILS').getByRole('button', { name: 'Next' }).click();
+await page2.locator('#mat-input-108').fill('Nominee');
+await page2.locator('#mat-input-109').fill('25');
+await page2.getByLabel('3NOMINEE DETAILS').getByLabel('', { exact: true }).locator('span').click();
+await page2.getByText('Sister').click();
+await page2.locator('#mat-input-110').fill('100');
+await page2.waitForTimeout(1000);
+await page2.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
 
-      export const DocumentUploadHelper = {
-        async uploadIdentityAndAddressProof(page: Page, isMobile: boolean) {
-          await page.getByText('Other', { exact: true }).click();
-          await page.getByLabel('Identity Proof Type').getByText('Identity Proof Type').click();
-          await page.getByText('PAN', { exact: true }).click();
-          await page.getByText('Address Proof TypeAddress').click();
-          await page.getByText('Voter ID').click();
-      
-          const uploadFile = path.join(__dirname, '../assets/Arunkumar.jpg');
-                for (let i = 0; i < 2; i++) {
-            const fileInput = await page.locator('input[type="file"]').nth(i);
-            await fileInput.setInputFiles(uploadFile);
-            await page.waitForTimeout(isMobile ? 2000 : 1000);
-          }const submitButton = page.getByRole('button', { name: 'Submit' });
-          await submitButton.click();}};
+test.setTimeout(80000);
+});
 
- test.describe('Payment Flow Care', () => {
+test('Womens Care', async ({ page :page3, isMobile }) => {
+
+  if (isMobile) { 
+    await page3.waitForTimeout(2000);
+    await page3.getByRole('button').filter({ hasText: 'menu' }).click();
+    await page3.locator('a').filter({ hasText: 'Health Insurance' }).click();
+    await page3.waitForTimeout(4000);
+    await page3.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
+    await page3.getByRole('textbox', { name: 'Name' }).type('Star');
+    await page3.getByRole('textbox', { name: 'Mobile Number' }).click();
+    await page3.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+    await page3.getByRole('button', { name: 'Next' }).click();
+    await page3.locator('#mat-input-25').type('25');
+    await page3.locator('#mat-input-27').type('25');
+    await page3.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
+    await page3.getByRole('button', { name: 'Proceed' }).click();
+    await page3.getByRole('button', { name: '₹ 14904/Yr' }).click();
+    await Acceptaccess(page3);
+  } else {
+    await page3.waitForTimeout(2000); 
+    // await page3.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
+    // await page3.waitForTimeout(1000);
+    await page3.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
+    await page3.getByRole('link', { name: 'Health Insurance', exact: true }).click();
+    await page3.waitForTimeout(5000);
+    await page3.getByRole('textbox', { name: 'Email' }).type('freedela0912@gmail.com');
+    await page3.getByRole('textbox', { name: 'Name' }).type('Star');
+    await page3.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+    await page3.getByRole('button', { name: 'Next' }).click();
+    await page3.locator('#mat-input-45').type('25');
+    await page3.locator('#mat-input-47').type('25');
+    await page3.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
+    await page3.getByRole('button', { name: 'Proceed' }).click();
+    await page3.getByRole('button', { name: '₹ 14904/Yr' }).click();
+    await Acceptaccess(page3);
+  }
+
+  if (isMobile) {
+    await page3.evaluate(() => window.scrollTo(0, 0));
+  }
+
+  await page3.waitForTimeout(5000);
+  await page3.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
+  await page3.getByText('Mr', { exact: true }).click();
+  await page3.getByRole('textbox', { name: 'Last Name' }).type('WomensCare');
+  await page3.getByLabel('1PROPOSER DETAILS').getByText('OccupationOccupation *').click();
+  await page3.getByText('PROFESSIONAL-ENGINEER').click();
+  await page3.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09121999');
+  await page3.getByLabel('1PROPOSER DETAILS').locator('div').filter({ hasText: /^Email ID \*$/ }).nth(3).click();
+  await page3.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 1 *').type('2A');
+  await page3.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Address 2 *').type('Star Comprehensive');
+  await page3.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Pincode *').type('600012');
+  await page3.waitForTimeout(2000);
+  await page3.getByLabel('1PROPOSER DETAILS').getByLabel('City *').getByText('City').click();
+  await page3.getByText('Chennai').click();
+  await page3.waitForTimeout(2000);
+  await page3.getByLabel('1PROPOSER DETAILS').getByLabel('Area *').getByText('Area').click();
+  await page3.getByText('Perambur Barracks').click();
+  await FormHelper.fillFormAndUploadFiles(page3);
+  await page3.getByLabel('2INSURED DETAILS').getByText('Same as proposer').click();
+  await page3.getByRole('textbox', { name: 'Height(cms)' }).type('170');
+  await page3.getByRole('textbox', { name: 'Weight(kgs)' }).type('70');
+  await page3.waitForTimeout(2000);
+  await page3.getByRole('button', { name: '2.INSURED DETAILS' }).click();
+  await page3.waitForTimeout(2000);
+  await page3.getByRole('textbox', { name: 'Name', exact: true }).type('Test SW');
+  await page3.getByRole('region', { name: '2.INSURED DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('09121999');
+  await page3.getByRole('combobox', { name: 'Gender Gender' }).locator('span').click();
+  await page3.getByText('Female').click();
+  await page3.getByRole('textbox', { name: 'Height(cms)' }).fill('160');
+  await page3.getByRole('textbox', { name: 'Weight(kgs)' }).fill('60');
+  await page3.getByRole('combobox', { name: 'Occupation Occupation' }).locator('span').click();
+  await page3.getByText('Housewives').click();
+  await page3.getByLabel('2INSURED DETAILS').getByText('Relationship with ProposerRelationship with Proposer *').click();
+  await page3.getByText('SPOUSE', { exact: true }).click();
+  await page3.getByLabel('2INSURED DETAILS').getByRole('button', { name: 'Next' }).click();
+  await page3.locator('#mat-input-108').fill('Nominee');
+  await page3.locator('#mat-input-109').fill('25');
+  await page3.getByLabel('3NOMINEE DETAILS').getByLabel('', { exact: true }).locator('span').click();
+  await page3.getByText('Brother', { exact: true }).click();
+  await page3.locator('#mat-input-110').fill('100');
+  await page3.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
+});
+
+test.setTimeout(80000);
+
+});
+
+export const DocumentUploadHelper = {
+  async uploadIdentityAndAddressProof(page: Page, isMobile: boolean) {
+    await page.getByText('Other', { exact: true }).click();
+    await page.getByLabel('Identity Proof Type').getByText('Identity Proof Type').click();
+    await page.getByText('PAN', { exact: true }).click();
+    await page.getByText('Address Proof TypeAddress').click();
+    await page.getByText('Voter ID').click();
+
+    const uploadFile = path.join(__dirname, '../assets/Arunkumar.jpg');
+    for (let i = 0; i < 2; i++) {
+      const fileInput = await page.locator('input[type="file"]').nth(i);
+      await fileInput.setInputFiles(uploadFile);
+    }
+    const submitButton = page.getByRole('button', { name: 'Submit' });
+    await submitButton.click();
+  },
+};
+
+test.describe.parallel('Payment Flow Care', () => {
         test.afterEach(async ({ page, isMobile }) => {
           const copyLinkButton = page.getByRole('button', { name: 'Copy Link' });
           if (isMobile) await copyLinkButton.scrollIntoViewIfNeeded();
@@ -357,247 +378,300 @@ test('Womens Care', async ({ page, isMobile }) => {
           if (isMobile) await payButton.scrollIntoViewIfNeeded();
           await payButton.click();
         });
-test ('Care Supreme Floater', async ({ page, isMobile }) => {
+        test('Care Supreme Floater', async ({ page : page4, isMobile }) => {
 
-      if (isMobile) {await page.waitForTimeout(2000);
-        await page.getByRole('button').filter({ hasText: 'menu' }).click();
-        await page.locator('a').filter({ hasText: 'Health Insurance' }).click();
-        await page.waitForTimeout(2000);
-      await page.getByRole('textbox', { name: 'Email' }).fill('Care@gmail.com');
-      await page.getByRole('textbox', { name: 'Name' }).fill('Care');
-      await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-      await page.getByRole('button', { name: 'Next' }).click();
-      await page.locator('#mat-input-25').type('25');
-      await page.locator('#mat-input-27').type('25');
-      await page.getByRole('textbox', { name: 'PIN CODE' }).fill('600012');
-      await page.getByRole('button', { name: 'Proceed' }).click();
-      await page.getByRole('button', { name: '₹9838 /Yr' }).click();
-      } else {await page.waitForTimeout(5000); 
-        await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
-        await page.waitForTimeout(1000);
-        await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
-        await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
-      await page.waitForTimeout(3000);
-      await page.getByRole('textbox', { name: 'Name' }).fill('Care');
-      await page.getByRole('textbox', { name: 'Email' }).fill('Care@gmail.com');
-      await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-      await page.getByRole('button', { name: 'Next' }).click();
-      await page.locator('#mat-input-45').type('25');
-      await page.locator('#mat-input-47').type('25');
-      await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
-      await page.getByRole('button', { name: 'Proceed' }).click();
-      await page.getByRole('button', { name: '₹ 9838/Yr' }).click();
-      await Acceptaccess(page); }
-      await page.waitForTimeout(2000);
-      await DocumentUploadHelper.uploadIdentityAndAddressProof(page, isMobile);
-      await page.locator('#mat-select-value-35').getByText('Title').click();
-      await page.getByText('Mr', { exact: true }).click();
-      await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('First Name *').type('test');
-      await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Last Name *').fill('s');
-      await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('08062002');
-      await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Email ID *').fill('free@gmail.com');
-      await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Mobile Number *').fill('8531913068');
-      await page.locator('#mat-input-60').fill('34');
-      await page.locator('#mat-input-61').fill('anna nagar ');
-      await page.locator('#mat-input-62').fill('627005');
-      await page.waitForTimeout(1000);
-      await page.locator('#mat-select-value-27').getByText('City').click();
-      await page.waitForTimeout(2000);
-      await page.getByText('Palayamkottai').click();
-      await page.locator('.mat-checkbox-inner-container').first().click();
-      await page.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
-      await page.getByRole('strong').click();
-      await page.getByRole('textbox', { name: 'Height(Cm)' }).fill('170');
-      await page.getByRole('textbox', { name: 'Weight(Kg)' }).fill('70');
-      await page.getByRole('button', { name: 'SPOUSE DETAILS' }).click();
-      await page.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
-      await page.getByText('Ms', { exact: true }).click();
-      await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('First Name *').fill('test');
-      await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Last Name *').fill('w');
-      await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('08062001');
-      await page.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
-      await page.getByText('SPOUSE', { exact: true }).click();
-      await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Email ID *').fill('free@gmail.com');
-      await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Mobile Number *').fill('8531913068');
-      await page.getByRole('textbox', { name: 'Height(Cm)' }).fill('160');
-      await page.getByRole('textbox', { name: 'Weight(Kg)' }).fill('60');
-      await page.locator('#cdk-accordion-child-27').getByRole('button', { name: 'Next' }).click();
-      await page.locator('#cdk-accordion-child-21').getByRole('button', { name: 'Next' }).click();
-      await page.getByRole('textbox', { name: 'Name of Nominee' }).type('nominee');
-      await page.getByRole('combobox', { name: 'Relationship with Insured' }).locator('div').nth(3).click();
-      await page.getByText('MOTHER', { exact: true }).click();
-      await page.getByRole('textbox', { name: 'Bank Account No' }).fill('237200021786');
-      await page.getByRole('textbox', { name: 'IFSC Code' }).fill('IOBA0002345');
-      await page.locator('#cdk-accordion-child-22').getByRole('button', { name: 'Next' }).click();    });
-      test.setTimeout(90000); 
+          if (isMobile) {
+            await page4.waitForTimeout(2000);
+            await page4.getByRole('button').filter({ hasText: 'menu' }).click();
+            await page4.locator('a').filter({ hasText: 'Health Insurance' }).click();
+            await page4.waitForTimeout(2000);
+            await page4.getByRole('textbox', { name: 'Email' }).fill('Care@gmail.com');
+            await page4.getByRole('textbox', { name: 'Name' }).fill('Care');
+            await page4.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+            await page4.getByRole('button', { name: 'Next' }).click();
+            await page4.locator('#mat-input-25').type('25');
+            await page4.locator('#mat-input-27').type('25');
+            await page4.getByRole('textbox', { name: 'PIN CODE' }).fill('600012');
+            await page4.getByRole('button', { name: 'Proceed' }).click();
+            await page4.getByRole('button', { name: '₹9838 /Yr' }).click();
+          } else {
+            await page4.waitForTimeout(5000);
+            await page4.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
+            await page4.waitForTimeout(1000);
+            await page4.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
+            await page4.getByRole('link', { name: 'Health Insurance', exact: true }).click();
+            await page4.waitForTimeout(3000);
+            await page4.getByRole('textbox', { name: 'Name' }).fill('Care');
+            await page4.getByRole('textbox', { name: 'Email' }).fill('Care@gmail.com');
+            await page4.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+            await page4.getByRole('button', { name: 'Next' }).click();
+            await page4.locator('#mat-input-45').type('25');
+            await page4.locator('#mat-input-47').type('25');
+            await page4.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
+            await page4.getByRole('button', { name: 'Proceed' }).click();
+            await page4.getByRole('button', { name: '₹ 9838/Yr' }).click();
+            await Acceptaccess(page4);
+          }
+        
+          await page4.waitForTimeout(2000);
+          await DocumentUploadHelper.uploadIdentityAndAddressProof(page4, isMobile);
+          await page4.locator('#mat-select-value-35').getByText('Title').click();
+          await page4.getByText('Mr', { exact: true }).click();
+          await page4.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('First Name *').type('test');
+          await page4.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Last Name *').fill('s');
+          await page4.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('08062002');
+          await page4.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Email ID *').fill('free@gmail.com');
+          await page4.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Mobile Number *').fill('8531913068');
+          await page4.locator('#mat-input-60').fill('34');
+          await page4.locator('#mat-input-61').fill('anna nagar ');
+          await page4.locator('#mat-input-62').fill('627005');
+          await page4.waitForTimeout(1000);
+          await page4.locator('#mat-select-value-27').getByText('City').click();
+          await page4.waitForTimeout(2000);
+          await page4.getByText('Palayamkottai').click();
+          await page4.locator('.mat-checkbox-inner-container').first().click();
+          await page4.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
+          await page4.getByRole('strong').click();
+          await page4.getByRole('textbox', { name: 'Height(Cm)' }).fill('170');
+          await page4.getByRole('textbox', { name: 'Weight(Kg)' }).fill('70');
+          await page4.getByRole('button', { name: 'SPOUSE DETAILS' }).click();
+          await page4.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
+          await page4.getByText('Ms', { exact: true }).click();
+          await page4.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('First Name *').fill('test');
+          await page4.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Last Name *').fill('w');
+          await page4.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('08062001');
+          await page4.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
+          await page4.getByText('SPOUSE', { exact: true }).click();
+          await page4.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Email ID *').fill('free@gmail.com');
+          await page4.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Mobile Number *').fill('8531913068');
+          await page4.getByRole('textbox', { name: 'Height(Cm)' }).fill('160');
+          await page4.getByRole('textbox', { name: 'Weight(Kg)' }).fill('60');
+          await page4.locator('#cdk-accordion-child-27').getByRole('button', { name: 'Next' }).click();
+          await page4.locator('#cdk-accordion-child-21').getByRole('button', { name: 'Next' }).click();
+          await page4.getByRole('textbox', { name: 'Name of Nominee' }).type('nominee');
+          await page4.getByRole('combobox', { name: 'Relationship with Insured' }).locator('div').nth(3).click();
+          await page4.getByText('MOTHER', { exact: true }).click();
+          await page4.getByRole('textbox', { name: 'Bank Account No' }).fill('237200021786');
+          await page4.getByRole('textbox', { name: 'IFSC Code' }).fill('IOBA0002345');
+          await page4.locator('#cdk-accordion-child-22').getByRole('button', { name: 'Next' }).click();
+        
+        });
+        test.setTimeout(80000);
 
-test('Care Supreme Floater 2A + 2C', async ({ page, isMobile }) => {
-      if (isMobile) {await page.waitForTimeout(2000);
-        await page.getByRole('button').filter({ hasText: 'menu' }).click();
-        await page.locator('a').filter({ hasText: 'Health Insurance' }).click();
-        await page.waitForTimeout(2000);
-      await page.getByRole('textbox', { name: 'Email' }).fill('Care@gmail.com');
-      await page.getByRole('textbox', { name: 'Name' }).fill('Care Test');
-      await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-      await page.getByRole('button', { name: 'Next' }).click();
-      await page.locator('#mat-input-25').type('40');
-      // Label: Fill the age fields for proposer and insured
-      await page.locator('#mat-input-27').type('40');
-      await page.locator('#mat-input-29').type('15');
-      await page.locator('#mat-input-31').type('10');
-      await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
-      await page.getByRole('button', { name: 'Proceed' }).click();
-      await page.getByRole('button', { name: '₹16235 /Yr' }).click();    
-      } else {
-      // Label: Handle desktop flow for filling proposer and insured details
-      await page.waitForTimeout(2000); 
-      await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
-      await page.waitForTimeout(1000);
-      await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
-      await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
-      await page.waitForTimeout(3000);
-      await page.getByRole('textbox', { name: 'Email' }).fill('Care@gmail.com');
-      await page.getByRole('textbox', { name: 'Name' }).fill('Care Test');
-      await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-      await page.getByRole('button', { name: 'Next' }).click();
-      await page.locator('#mat-input-45').fill('40');
-      await page.locator('#mat-input-47').fill('40');
-      await page.locator('#mat-input-49').fill('15');
-      await page.locator('#mat-input-51').fill('10');
-      await page.getByRole('textbox', { name: 'PIN CODE' }).type('600010');
-      await page.getByRole('button', { name: 'Proceed' }).click();
-      await page.waitForTimeout(2000);
-      await page.getByRole('button', { name: '₹ 16235/Yr' }).click();
-      await Acceptaccess(page);  }
-      await page.waitForTimeout(2000);
-      await DocumentUploadHelper.uploadIdentityAndAddressProof(page, isMobile);
-      await page.locator('#mat-select-value-35').getByText('Title').click();
-      await page.getByText('Mr', { exact: true }).click();
-      await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('First Name *').fill('Care');
-      await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Last Name *').fill('Supreme FF');
-      await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('09121999');
-      await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Email ID *').fill('test@gmail.com');
-      await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Mobile Number *').fill('8531913067');
-      await page.locator('#mat-input-60').fill('3');
-      await page.locator('#mat-input-61').fill('4');
-      await page.locator('#mat-input-62').fill('600010');
-      await page.waitForTimeout(1000);
-      await page.locator('#mat-select-value-27').getByText('City').click();
-      await page.waitForTimeout(2000);
-      await page.getByText('Chennai').click();
-      const checkbox = page.locator('.mat-checkbox-inner-container').first();
-      if (isMobile) await checkbox.scrollIntoViewIfNeeded();
-      await page.locator('.mat-checkbox-inner-container').first().click();
-      await page.waitForTimeout(2000);
-      await page.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
-      await page.getByRole('strong').click();
-      await page.getByRole('textbox', { name: 'Height(Cm)' }).fill('170');
-      await page.getByRole('textbox', { name: 'Weight(Kg)' }).fill('70');
-      await page.getByRole('button', { name: 'SPOUSE DETAILS' }).click();
-      await page.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
-      await page.getByText('Ms', { exact: true }).click();
-      await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('First Name *').fill('Care');
-      await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Last Name *').fill('Spouse');
-      await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09121985');
-      await page.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
-      await page.getByText('SPOUSE', { exact: true }).click();
-      await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Email ID *').fill('freedela@gmail.com');
-      await page.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Mobile Number *').fill('8531913068');
-      await page.getByRole('textbox', { name: 'Height(Cm)' }).fill('160');
-      await page.getByRole('textbox', { name: 'Weight(Kg)' }).fill('60');
-      await page.getByRole('button', { name: 'SON DETAILS' }).click();
-      await page.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
-      await page.getByRole('option', { name: 'Mr' }).locator('span').click();
-      await page.getByRole('region', { name: 'SON DETAILS' }).getByLabel('First Name *').fill('Care');
-      await page.getByRole('region', { name: 'SON DETAILS' }).getByLabel('Last Name *').fill('Son');
-      await page.getByRole('region', { name: 'SON DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09122010');
-      await page.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
-      await page.getByText('SON', { exact: true }).click();
-      await page.getByRole('textbox', { name: 'Height(Cm)' }).fill('150');
-      await page.getByRole('textbox', { name: 'Weight(Kg)' }).fill('50');
-      await page.getByRole('button', { name: 'DAUGHTER DETAILS' }).click();
-      await page.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
-      await page.getByRole('option', { name: 'Ms' }).locator('span').click();
-      await page.getByRole('region', { name: 'DAUGHTER DETAILS' }).getByLabel('First Name *').fill('Care');
-      await page.getByRole('region', { name: 'DAUGHTER DETAILS' }).getByLabel('Last Name *').fill('Daughter');
-      await page.getByRole('region', { name: 'DAUGHTER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09122015');
-      await page.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
-      await page.getByText('DAUGHTER', { exact: true }).click();
-      await page.getByRole('textbox', { name: 'Height(Cm)' }).fill('150');
-      await page.getByRole('textbox', { name: 'Weight(Kg)' }).fill('50');
-      await page.locator('#cdk-accordion-child-29').getByRole('button', { name: 'Next' }).click();
-      await page.locator('#cdk-accordion-child-21').getByRole('button', { name: 'Next' }).click();
-      await page.getByRole('textbox', { name: 'Name of Nominee' }).type('nominee');
-      await page.getByRole('combobox', { name: 'Relationship with Insured' }).locator('div').nth(3).click();
-      await page.getByText('MOTHER', { exact: true }).click();
-      await page.getByRole('textbox', { name: 'Bank Account No' }).fill('237200021786');
-      await page.getByRole('textbox', { name: 'IFSC Code' }).fill('IOBA0002345');
-      await page.locator('#cdk-accordion-child-22').getByRole('button', { name: 'Next' }).click();    });
-      test.setTimeout(90000);
-
-      test('Care Individual', async ({ page, isMobile }) => {
-
-        if (isMobile) {
-          await page.waitForTimeout(4000);
-          await page.getByRole('button').filter({ hasText: 'menu' }).click();
-          await page.locator('a').filter({ hasText: 'Health Insurance' }).click();
-          await page.waitForTimeout(5000);
-          await page.getByRole('textbox', { name: 'Email' }).type('Care@gmail.com');
-          await page.getByRole('textbox', { name: 'Name' }).type('Care');
-        await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-        await page.getByRole('button', { name: 'Next' }).click();
-        await page.locator('#mat-input-25').type('25');
-        await page.getByRole('textbox', { name: 'PIN CODE' }).fill('600012');
-        await page.getByRole('button', { name: 'Proceed' }).click();
-        await page.getByRole('button', { name: '₹7552 /Yr' }).click();
-        } else {await page.waitForTimeout(2000); 
-          await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
-          await page.waitForTimeout(1000);
-          await page.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
-          await page.waitForTimeout(2000);
-          await page.getByRole('link', { name: 'Health Insurance', exact: true }).click();
-        await page.waitForTimeout(7000);
-        await page.getByRole('textbox', { name: 'Email' }).type('Care@gmail.com');
-        await page.getByRole('textbox', { name: 'Name' }).type('Care Test');
-        await page.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
-        await page.getByRole('button', { name: 'Next' }).click();
-        await page.locator('#mat-input-45').type('25');
-        await page.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
-        await page.getByRole('button', { name: 'Proceed' }).click();
-        await page.getByRole('button', { name: '₹ 7552/Yr' }).click();
-        await Acceptaccess(page);
-        }if (isMobile) {
-          await page.evaluate(() => window.scrollTo(0, 0)); 
-        }
-       await DocumentUploadHelper.uploadIdentityAndAddressProof(page, isMobile);
-       await page.locator('#mat-select-value-35').getByText('Title').click();
-       await page.getByText('Mr', { exact: true }).click();
-        await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('First Name *').fill('Care');
-        await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Last Name *').fill('Individual');
-        await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('08062002');
-        await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Email ID *').fill('free@gmail.com');
-        await page.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Mobile Number *').fill('8531913068');
-        await page.locator('#mat-input-60').fill('34');
-        await page.locator('#mat-input-61').fill('anna nagar ');
-        await page.locator('#mat-input-62').fill('627005');
-        await page.waitForTimeout(1000);
-        await page.locator('#mat-select-value-27').getByText('City').click();
-        await page.waitForTimeout(1000);
-        await page.getByText('Palayamkottai').click();
-        const checkbox = page.locator('.mat-checkbox-inner-container').first();
-        if (isMobile) await checkbox.scrollIntoViewIfNeeded();
-        await checkbox.click();
-        await page.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
-        await page.getByRole('strong').click();
-        await page.getByRole('textbox', { name: 'Height(Cm)' }).fill('170');
-        await page.getByRole('textbox', { name: 'Weight(Kg)' }).fill('70');
-        await page.locator('span.mat-button-wrapper:has-text("Next")').nth(1).click();
-        await page.locator('span.mat-button-wrapper:has-text("Next")').nth(2).click();
-        await page.getByRole('textbox', { name: 'Name of Nominee' }).type('nominee');
-        await page.getByRole('combobox', { name: 'Relationship with Insured' }).locator('div').nth(3).click();
-        await page.getByText('MOTHER', { exact: true }).click();
-        await page.getByRole('textbox', { name: 'Bank Account No' }).fill('237200021786');
-        await page.getByRole('textbox', { name: 'IFSC Code' }).fill('IOBA0002345');
-        await page.locator('#cdk-accordion-child-22').getByRole('button', { name: 'Next' }).click();    });
-        test.setTimeout(90000);
-    });
+        test('Care Supreme Floater 2A + 2C', async ({ page: page5, isMobile }) => {
+          if (isMobile) {
+            await page5.waitForTimeout(2000);
+            await page5.getByRole('button').filter({ hasText: 'menu' }).click();
+            await page5.locator('a').filter({ hasText: 'Health Insurance' }).click();
+            await page5.waitForTimeout(2000);
+            await page5.getByRole('textbox', { name: 'Email' }).fill('Care@gmail.com');
+            await page5.getByRole('textbox', { name: 'Name' }).fill('Care Test');
+            await page5.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+            await page5.getByRole('button', { name: 'Next' }).click();
+            await page5.locator('#mat-input-25').type('40');
+            await page5.locator('#mat-input-27').type('40');
+            await page5.locator('#mat-input-29').type('15');
+            await page5.locator('#mat-input-31').type('10');
+            await page5.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
+            await page5.getByRole('button', { name: 'Proceed' }).click();
+            await page5.getByRole('button', { name: '₹16235 /Yr' }).click();
+          } else {
+            await page5.waitForTimeout(2000);
+            await page5.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
+            await page5.waitForTimeout(1000);
+            await page5.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
+            await page5.getByRole('link', { name: 'Health Insurance', exact: true }).click();
+            await page5.waitForTimeout(3000);
+            await page5.getByRole('textbox', { name: 'Email' }).fill('Care@gmail.com');
+            await page5.getByRole('textbox', { name: 'Name' }).fill('Care Test');
+            await page5.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+            await page5.getByRole('button', { name: 'Next' }).click();
+            await page5.locator('#mat-input-45').fill('40');
+            await page5.locator('#mat-input-47').fill('40');
+            await page5.locator('#mat-input-49').fill('15');
+            await page5.locator('#mat-input-51').fill('10');
+            await page5.getByRole('textbox', { name: 'PIN CODE' }).type('600010');
+            await page5.getByRole('button', { name: 'Proceed' }).click();
+            await page5.waitForTimeout(2000);
+            await page5.getByRole('button', { name: '₹ 16235/Yr' }).click();
+            await Acceptaccess(page5);
+          }
+          await page5.waitForTimeout(2000);
+          await DocumentUploadHelper.uploadIdentityAndAddressProof(page5, isMobile);
+          await page5.locator('#mat-select-value-35').getByText('Title').click();
+          await page5.getByText('Mr', { exact: true }).click();
+          await page5.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('First Name *').fill('Care');
+          await page5.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Last Name *').fill('Supreme FF');
+          await page5.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('09121999');
+          await page5.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Email ID *').fill('test@gmail.com');
+          await page5.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Mobile Number *').fill('8531913067');
+          await page5.locator('#mat-input-60').fill('3');
+          await page5.locator('#mat-input-61').fill('4');
+          await page5.locator('#mat-input-62').fill('600010');
+          await page5.waitForTimeout(1000);
+          await page5.locator('#mat-select-value-27').getByText('City').click();
+          await page5.waitForTimeout(2000);
+          await page5.getByText('Chennai').click();
+          const checkbox = page5.locator('.mat-checkbox-inner-container').first();
+          if (isMobile) await checkbox.scrollIntoViewIfNeeded();
+          await checkbox.click();
+          await page5.waitForTimeout(2000);
+          await page5.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
+          await page5.getByRole('strong').click();
+          await page5.getByRole('textbox', { name: 'Height(Cm)' }).fill('170');
+          await page5.getByRole('textbox', { name: 'Weight(Kg)' }).fill('70');
+        
+          // SPOUSE
+          await page5.getByRole('button', { name: 'SPOUSE DETAILS' }).click();
+          await page5.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
+          await page5.getByText('Ms', { exact: true }).click();
+          await page5.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('First Name *').fill('Care');
+          await page5.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Last Name *').fill('Spouse');
+          await page5.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09121985');
+          await page5.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
+          await page5.getByText('SPOUSE', { exact: true }).click();
+          await page5.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Email ID *').fill('freedela@gmail.com');
+          await page5.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Mobile Number *').fill('8531913068');
+          await page5.getByRole('textbox', { name: 'Height(Cm)' }).fill('160');
+          await page5.getByRole('textbox', { name: 'Weight(Kg)' }).fill('60');
+        
+          // SON
+          await page5.getByRole('button', { name: 'SON DETAILS' }).click();
+          await page5.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
+          await page5.getByRole('option', { name: 'Mr' }).locator('span').click();
+          await page5.getByRole('region', { name: 'SON DETAILS' }).getByLabel('First Name *').fill('Care');
+          await page5.getByRole('region', { name: 'SON DETAILS' }).getByLabel('Last Name *').fill('Son');
+          await page5.getByRole('region', { name: 'SON DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09122010');
+          await page5.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
+          await page5.getByText('SON', { exact: true }).click();
+          await page5.getByRole('textbox', { name: 'Height(Cm)' }).fill('150');
+          await page5.getByRole('textbox', { name: 'Weight(Kg)' }).fill('50');
+        
+          // DAUGHTER
+          await page5.getByRole('button', { name: 'DAUGHTER DETAILS' }).click();
+          await page5.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
+          await page5.getByRole('option', { name: 'Ms' }).locator('span').click();
+          await page5.getByRole('region', { name: 'DAUGHTER DETAILS' }).getByLabel('First Name *').fill('Care');
+          await page5.getByRole('region', { name: 'DAUGHTER DETAILS' }).getByLabel('Last Name *').fill('Daughter');
+          await page5.getByRole('region', { name: 'DAUGHTER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09122015');
+          await page5.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
+          await page5.getByText('DAUGHTER', { exact: true }).click();
+          await page5.getByRole('textbox', { name: 'Height(Cm)' }).fill('150');
+          await page5.getByRole('textbox', { name: 'Weight(Kg)' }).fill('50');
+        
+          await page5.locator('#cdk-accordion-child-29').getByRole('button', { name: 'Next' }).click();
+          await page5.locator('#cdk-accordion-child-21').getByRole('button', { name: 'Next' }).click();
+          await page5.getByRole('textbox', { name: 'Name of Nominee' }).type('nominee');
+          await page5.getByRole('combobox', { name: 'Relationship with Insured' }).locator('div').nth(3).click();
+          await page5.getByText('MOTHER', { exact: true }).click();
+          await page5.getByRole('textbox', { name: 'Bank Account No' }).fill('237200021786');
+          await page5.getByRole('textbox', { name: 'IFSC Code' }).fill('IOBA0002345');
+          await page5.locator('#cdk-accordion-child-22').getByRole('button', { name: 'Next' }).click();
+        });
+        test.setTimeout(80000);
+        
+   test('Care Supreme Floater 2A ', async ({page : page6, isMobile }) => {
+    page6.pause();
+  if (isMobile) {
+    await page6.waitForTimeout(2000);
+    await page6.getByRole('button').filter({ hasText: 'menu' }).click();
+    await page6.locator('a').filter({ hasText: 'Health Insurance' }).click();
+    await page6.waitForTimeout(2000);
+    await page6.getByRole('textbox', { name: 'Email' }).fill('Care@gmail.com');
+    await page6.getByRole('textbox', { name: 'Name' }).fill('Care Test');
+    await page6.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+    await page6.getByRole('button', { name: 'Next' }).click();
+    await page6.locator('#mat-input-25').type('40');
+    await page6.locator('#mat-input-27').type('40');
+    await page6.locator('#mat-input-29').type('15');
+    await page6.locator('#mat-input-31').type('10');
+    await page6.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
+    await page6.getByRole('button', { name: 'Proceed' }).click();
+    await page6.getByRole('button', { name: '₹16235 /Yr' }).click();
+  } else {
+    await page6.waitForTimeout(2000); 
+    // await page6.locator('span.horizontal-menu-title:has-text("Online Insurance")').hover();
+    // await page6.waitForTimeout(1000);
+    await page6.locator('span.horizontal-menu-title:has-text("Online Insurance")').click();
+    await page6.getByRole('link', { name: 'Health Insurance', exact: true }).click();
+    await page6.waitForTimeout(3000);
+    await page6.getByRole('textbox', { name: 'Email' }).fill('Care@gmail.com');
+    await page6.getByRole('textbox', { name: 'Name' }).fill('Care Test');
+    await page6.getByRole('textbox', { name: 'Mobile Number' }).fill('8531913069');
+    await page6.getByRole('button', { name: 'Next' }).click();
+    await page6.locator('#mat-input-45').fill('40');
+    await page6.locator('#mat-input-47').fill('40');
+    await page6.locator('#mat-input-49').fill('15');
+    await page6.locator('#mat-input-51').fill('10');
+    await page6.getByRole('textbox', { name: 'PIN CODE' }).type('600010');
+    await page6.getByRole('button', { name: 'Proceed' }).click();
+    await page6.waitForTimeout(2000);
+    await page6.getByRole('button', { name: '₹ 16235/Yr' }).click();
+    await Acceptaccess(page6);
+  }
+  await page6.waitForTimeout(2000);
+  await DocumentUploadHelper.uploadIdentityAndAddressProof(page6, isMobile);
+  await page6.locator('#mat-select-value-35').getByText('Title').click();
+  await page6.getByText('Mr', { exact: true }).click();
+  await page6.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('First Name *').fill('Care');
+  await page6.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Last Name *').fill('Supreme FF');
+  await page6.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').type('09121999');
+  await page6.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Email ID *').fill('test@gmail.com');
+  await page6.getByRole('tabpanel', { name: 'PROPOSER DETAILS' }).getByLabel('Mobile Number *').fill('8531913067');
+  await page6.locator('#mat-input-60').fill('3');
+  await page6.locator('#mat-input-61').fill('4');
+  await page6.locator('#mat-input-62').fill('600010');
+  await page6.waitForTimeout(1000);
+  await page6.locator('#mat-select-value-27').getByText('City').click();
+  await page6.waitForTimeout(2000);
+  await page6.getByText('Chennai').click();
+  const checkbox = page6.locator('.mat-checkbox-inner-container').first();
+  if (isMobile) await checkbox.scrollIntoViewIfNeeded();
+  await page6.locator('.mat-checkbox-inner-container').first().click();
+  await page6.waitForTimeout(2000);
+  await page6.locator('span.mat-button-wrapper:has-text("Next")').nth(0).click();
+  await page6.getByRole('strong').click();
+  await page6.getByRole('textbox', { name: 'Height(Cm)' }).fill('170');
+  await page6.getByRole('textbox', { name: 'Weight(Kg)' }).fill('70');
+  await page6.getByRole('button', { name: 'SPOUSE DETAILS' }).click();
+  await page6.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
+  await page6.getByText('Ms', { exact: true }).click();
+  await page6.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('First Name *').fill('Care');
+  await page6.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Last Name *').fill('Spouse');
+  await page6.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09121985');
+  await page6.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
+  await page6.getByText('SPOUSE', { exact: true }).click();
+  await page6.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Email ID *').fill('freedela@gmail.com');
+  await page6.getByRole('region', { name: 'SPOUSE DETAILS' }).getByLabel('Mobile Number *').fill('8531913068');
+  await page6.getByRole('textbox', { name: 'Height(Cm)' }).fill('160');
+  await page6.getByRole('textbox', { name: 'Weight(Kg)' }).fill('60');
+  await page6.getByRole('button', { name: 'SON DETAILS' }).click();
+  await page6.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
+  await page6.getByRole('option', { name: 'Mr' }).locator('span').click();
+  await page6.getByRole('region', { name: 'SON DETAILS' }).getByLabel('First Name *').fill('Care');
+  await page6.getByRole('region', { name: 'SON DETAILS' }).getByLabel('Last Name *').fill('Son');
+  await page6.getByRole('region', { name: 'SON DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09122010');
+  await page6.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
+  await page6.getByText('SON', { exact: true }).click();
+  await page6.getByRole('textbox', { name: 'Height(Cm)' }).fill('150');
+  await page6.getByRole('textbox', { name: 'Weight(Kg)' }).fill('50');
+  await page6.getByRole('button', { name: 'DAUGHTER DETAILS' }).click();
+  await page6.getByRole('combobox', { name: 'Title Title' }).locator('span').click();
+  await page6.getByRole('option', { name: 'Ms' }).locator('span').click();
+  await page6.getByRole('region', { name: 'DAUGHTER DETAILS' }).getByLabel('First Name *').fill('Care');
+  await page6.getByRole('region', { name: 'DAUGHTER DETAILS' }).getByLabel('Last Name *').fill('Daughter');
+  await page6.getByRole('region', { name: 'DAUGHTER DETAILS' }).getByLabel('DOB (DD/MM/YYYY) *').fill('09122015');
+  await page6.getByRole('combobox', { name: 'Relationship with Proposer' }).locator('span').click();
+  await page6.getByText('DAUGHTER', { exact: true }).click();
+  await page6.getByRole('textbox', { name: 'Height(Cm)' }).fill('150');
+  await page6.getByRole('textbox', { name: 'Weight(Kg)' }).fill('50');
+  await page6.locator('#cdk-accordion-child-29').getByRole('button', { name: 'Next' }).click();
+  await page6.locator('#cdk-accordion-child-21').getByRole('button', { name: 'Next' }).click();
+  await page6.getByRole('textbox', { name: 'Name of Nominee' }).type('nominee');
+  await page6.getByRole('combobox', { name: 'Relationship with Insured' }).locator('div').nth(3).click();
+  await page6.getByText('MOTHER', { exact: true }).click();
+  await page6.getByRole('textbox', { name: 'Bank Account No' }).fill('237200021786');
+  await page6.getByRole('textbox', { name: 'IFSC Code' }).fill('IOBA0002345');
+  await page6.locator('#cdk-accordion-child-22').getByRole('button', { name: 'Next' }).click();
+});
+test.setTimeout(80000); });
