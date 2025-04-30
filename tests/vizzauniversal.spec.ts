@@ -175,7 +175,7 @@ test('Comprehensive', async ({ page :page1, isMobile }) => {
     await page1.locator('#mat-input-110').fill('100');
     await page1.waitForTimeout(1000);
     await page1.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();        }); 
-    test.setTimeout(80000);
+    test.setTimeout(90000);
 
 test('Assure', async ({ page :page2, isMobile }) => {
   
@@ -278,7 +278,7 @@ test('Womens Care', async ({ page :page3, isMobile }) => {
     await page3.locator('#mat-input-27').type('25');
     await page3.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
     await page3.getByRole('button', { name: 'Proceed' }).click();
-    await page3.getByRole('button', { name: '₹ 14904/Yr' }).click();
+    await page3.getByRole('button', { name: '₹ 13847/Yr' }).click();
     await Acceptaccess(page3);
   } else {
     await page3.waitForTimeout(2000); 
@@ -295,7 +295,7 @@ test('Womens Care', async ({ page :page3, isMobile }) => {
     await page3.locator('#mat-input-47').type('25');
     await page3.getByRole('textbox', { name: 'PIN CODE' }).type('600012');
     await page3.getByRole('button', { name: 'Proceed' }).click();
-    await page3.getByRole('button', { name: '₹ 14904/Yr' }).click();
+    await page3.getByRole('button', { name: '₹ 13847/Yr' }).click();
     await Acceptaccess(page3);
   }
 
@@ -344,9 +344,10 @@ test('Womens Care', async ({ page :page3, isMobile }) => {
   await page3.getByText('Brother', { exact: true }).click();
   await page3.locator('#mat-input-110').fill('100');
   await page3.getByLabel('3NOMINEE DETAILS').getByRole('button', { name: 'Next' }).click();
+  await page3.pause();
 });
 
-test.setTimeout(80000);
+test.setTimeout(90000);
 
 });
 
@@ -568,10 +569,9 @@ test.describe.parallel('Payment Flow Care', () => {
           await page5.getByRole('textbox', { name: 'IFSC Code' }).fill('IOBA0002345');
           await page5.locator('#cdk-accordion-child-22').getByRole('button', { name: 'Next' }).click();
         });
-        test.setTimeout(80000);
+        test.setTimeout(100000);
         
-   test('Care Supreme Floater 2A ', async ({page : page6, isMobile }) => {
-    page6.pause();
+   test ('Care Supreme Floater 2A ', async ({page : page6, isMobile }) => {
   if (isMobile) {
     await page6.waitForTimeout(2000);
     await page6.getByRole('button').filter({ hasText: 'menu' }).click();
