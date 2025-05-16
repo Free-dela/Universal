@@ -9,10 +9,21 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "description": "",
   "devDependencies": {
     "@playwright/test": "^1.52.0",
     "@types/node": "^22.14.0",
     "allure-playwright": "^3.2.1"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Free-dela/Universal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Free-dela/Universal/issues"
+  },
+  "homepage": "https://github.com/Free-dela/Universal#readme",
+  "description": ""
 }
